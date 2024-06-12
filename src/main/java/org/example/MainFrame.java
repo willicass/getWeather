@@ -12,13 +12,13 @@ public class MainFrame extends JFrame {
     private JTextArea resultArea;
 
     public MainFrame() {
-        setTitle("Consulta de Clima por CEP");
+        setTitle("Weather Lookup by ZIP Code");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
-        JLabel cepLabel = new JLabel("Digite o CEP:");
+        JLabel cepLabel = new JLabel("ZIP code:");
         cepLabel.setBounds(50, 30, 150, 25);
         add(cepLabel);
 
@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
         cepField.setBounds(150, 30, 150, 25);
         add(cepField);
 
-        searchButton = new JButton("Buscar Clima");
+        searchButton = new JButton("Search Weather");
         searchButton.setBounds(120, 70, 150, 25);
         add(searchButton);
 
@@ -52,10 +52,10 @@ public class MainFrame extends JFrame {
             String extrairLocalidade = APICorreios.extrairLocalidadeDoJSON(climaInfo);
             String buscarClima = APIClima.buscarClima(extrairLocalidade);
             String extrairClima = APIClima.extrairClimaDoJSON(buscarClima);
-            resultArea.setText("O CEP " + cep + " proveniênte da cidade: " + extrairLocalidade + " Atualmente está: " + extrairClima);
+            resultArea.setText("The ZIP " + cep + " from the city of: " + extrairLocalidade + " and it is currently: " + extrairClima);
         } catch (IOException e) {
             e.printStackTrace();
-            resultArea.setText("Erro ao buscar informações de clima para o CEP " + cep);
+            resultArea.setText("Error retrieving weather information for the ZIP code " + cep);
         }
     }
 
